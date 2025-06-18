@@ -22,13 +22,19 @@
 - **Forms**: React Hook Form + Zod
 - **Maps**: Google Maps JavaScript API
 
+### バックエンド・データベース
+
+- **Database**: Supabase (PostgreSQL + PostGIS)
+- **Geospatial**: PostGIS for 地理的検索
+- **Realtime**: Supabase Realtime
+- **Authentication**: Supabase Auth (将来実装)
+
 ### インフラ・開発
 
 - **Hosting**: Vercel (予定)
-- **Database**: PostgreSQL + PostGIS (予定)
 - **Package Manager**: npm
 - **Node.js**: 18.x
-- **Development**: Docker + Docker Compose
+- **Development**: Docker + Docker Compose (将来実装)
 
 ## 📁 重要ディレクトリ構造
 
@@ -93,9 +99,11 @@ pepino/
 
 - ✅ プロジェクト構造作成
 - ✅ 要件定義・機能設計
+- ✅ **Next.js 14環境構築完了**
+- ✅ **データベース選定 (Supabase)**
 - 🔄 詳細設計進行中
-- ⏳ Next.js 環境構築待ち
 - ⏳ UI 実装待ち
+- ⏳ 地図機能実装待ち
 
 ## 💡 Claude 支援時の重要ポイント
 
