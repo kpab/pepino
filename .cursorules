@@ -1,0 +1,26 @@
+# Pepino - オフライン即時参加型イベントアプリ
+# Next.js 14 + TypeScript + Tailwind CSS + App Router
+
+## プロジェクト概要
+このプロジェクトは、現在地周辺のオフラインイベントを発見・参加できるWebアプリです。
+
+## コーディング規則
+1. TypeScriptを必須とし、anyの使用は禁止
+2. コンポーネントはfunction宣言を使用
+3. Tailwind CSSのユーティリティクラスを優先
+4. APIルートはapp/api/配下に配置
+5. カスタムフックはhooks/配下に配置
+6. 型定義はtypes/配下に配置
+
+## ファイル命名規則
+- コンポーネント: PascalCase (EventCard.tsx)
+- フック: camelCase + use prefix (useEventSearch.ts)
+- ユーティリティ: camelCase (formatDate.ts)
+- 型定義: PascalCase + Type suffix (EventType.ts)
+
+## 推奨ライブラリ
+- 状態管理: Zustand
+- フォーム: React Hook Form + Zod
+- UI: Tailwind CSS + Headless UI
+- 地図: Google Maps API
+- HTTP: fetch (native)
