@@ -41,6 +41,8 @@ cp .env.example .env.local
 
 ### 3. 🗄️ データベース設定 (Supabase)
 
+**詳細な実装手順は [database-implementation.md](02-database-implementation.md) を参照**
+
 #### 3.1 Supabaseアカウント作成
 
 1. [https://supabase.com](https://supabase.com) でアカウント作成
