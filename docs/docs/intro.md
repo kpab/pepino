@@ -1,94 +1,126 @@
 ---
 sidebar_position: 1
-title: 🍑 Pepino - 概要
 ---
 
-# 🍑 Pepino Documentation
+# Pepino プロジェクトドキュメント
 
-> 現在地周辺のオフラインイベントを「今すぐ」発見・参加できるWebアプリ
-
-[![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.2-blue?logo=typescript)](https://www.typescriptlang.org/)
-[![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ecf8e?logo=supabase)](https://supabase.com/)
-
-## 📚 ドキュメント
-
-### 📋 要件・設計
-- [🎨 システム設計](./design/) - アーキテクチャ・データベース・API
-- [🗄️ データベース設計](./design/database) - PostgreSQL + PostGIS
-- [🔐 セキュリティ設計](./design/security)
-
-### 🛠️ 開発ガイド
-- [🚀 環境構築](./development/setup) - Next.js + Supabase セットアップ
-- [🐙 GitHub Pages設定](./development/github-pages-setup) - ドキュメント公開
-
-### 📊 プロジェクト管理
-- [🛠️ 技術選定記録](./project-management/decisions) - ADR
-- [📊 ガントチャート](./project-management/gantt-chart) - 詳細スケジュール
-- [📈 進捗トラッキング](./project-management/progress-tracking) - 現在の状況
-- [📋 TODOリスト](./project-management/todo-list) - 開発タスク一覧
+**Pepino**へようこそ！現在地周辺のオフラインイベントを「今すぐ」発見・参加できるWebアプリケーションです。
 
 ## 🎯 プロジェクト概要
 
-### 核心価値
+Pepinoは位置情報ベースでリアルな出会いに特化したイベント発見プラットフォームです。
+
+### 🔑 核心価値
+
 - **オフライン限定**: リアルな出会いに特化
-- **位置情報ベース**: GPS中心の近場イベント表示  
+- **位置情報ベース**: GPS/手動位置から近傍検索
 - **即時性**: 「今から2時間後」のような柔軟な参加
 - **統合表示**: connpass等外部APIとの連携
 
-### 開発状況
-**現在**: MVP開発準備段階 (2025年6月)
+## 🚀 開発状況
 
-- ✅ Next.js 14環境構築完了
-- ✅ データベース選定 (Supabase)
-- ✅ プロジェクト管理体制確立
-- 🔄 UI実装進行中
-- ⏳ 地図表示機能
+**現在**: MVP 開発段階
 
-### マイルストーン
-- **M1 (完了)**: 環境構築・基盤整備
-- **M2 (進行中)**: UI/UX設計・基本機能実装  
-- **M3 (予定)**: 地図・検索機能完成
-- **M4 (予定)**: MVP リリース (8月末予定)
+- ✅ プロジェクト構造作成
+- ✅ 要件定義・機能設計
+- ✅ **Next.js 14環境構築完了**
+- ✅ **全依存関係インストール済み**
+- ✅ **基本ディレクトリ構造作成済み**
+- ✅ **データベース選定 (Supabase)**
+- ✅ **ドキュメント整備完了**
+- 🔄 **基本UI実装中**
+- ⏳ 地図機能実装待ち
+- ⏳ 外部API連携待ち
 
-## 🛠️ 技術構成
+## 📚 ドキュメント構成
 
-### フロントエンド
-- **Next.js 14** (App Router) + **TypeScript** + **Tailwind CSS**
-- **Zustand** (状態管理) + **React Hook Form** + **Zod**
+このドキュメントサイトは以下のセクションで構成されています：
 
-### バックエンド・データベース
-- **Supabase** (PostgreSQL + PostGIS)
-- **Supabase Realtime** + **Supabase Auth**
+### 📋 Requirements (要件定義)
+プロジェクトの要件・仕様を定義
+- 概要・ビジョン
+- ユーザーペルソナ
+- ユースケース  
+- 機能要件
+- 非機能要件
 
-### インフラ
-- **Vercel** (ホスティング) + **GitHub Actions** (CI/CD)
-- **Google Maps API** + **connpass API**
+### 🎨 Design (設計)
+システム・UI設計ドキュメント
+- アーキテクチャ設計
+- UI/UXデザイン
+- API仕様
+- データベース設計
+- セキュリティ設計
 
-## 🚀 クイックスタート
+### 🔧 Development (開発)
+開発ガイド・技術ドキュメント
+- 環境構築手順
+- データベース実装
+- コーディング規約
+- テスト方針
+- デプロイメント
+- Docusaurus設定
+- GitHub Pages設定
 
-```bash
-# リポジトリクローン
-git clone https://github.com/kpab/pepino.git
-cd pepino
+### 📊 Project Management (プロジェクト管理)
+プロジェクト進行管理
+- プロジェクトロードマップ
+- マイルストーン管理
+- 設計決定記録
+- ガントチャート
+- 進捗追跡
+- TODOリスト
 
-# 依存関係インストール
-npm install
+## 🎯 目指すユーザーエクスペリエンス
 
-# 環境変数設定
-cp .env.example .env.local
-# .env.local を編集
-
-# 開発サーバー起動
-npm run dev
+```
+1. 位置情報許可/設定
+2. 現在地周辺のイベント一覧表示
+3. 興味のあるイベントをタップ
+4. 詳細確認（地図・所要時間・参加者構成）
+5. 参加ボタン押下
+6. 参加確認・会場案内
 ```
 
-詳細な環境構築手順は [開発環境セットアップ](./development/setup) を参照。
+## 🏗️ 技術スタック
 
-## 📄 ライセンス
+### フロントエンド
+- **Framework**: Next.js 14.2.4 (App Router)
+- **Language**: TypeScript 5.2.2
+- **Styling**: Tailwind CSS 3.4.4
+- **State Management**: Zustand 4.5.2
+- **Maps**: Google Maps JavaScript API
 
-MIT License
+### バックエンド・データベース
+- **Database**: Supabase 2.43.4 (PostgreSQL + PostGIS)
+- **Geospatial**: PostGIS for 地理的検索
+- **Realtime**: Supabase Realtime
+- **Authentication**: Supabase Auth
+
+### インフラ・開発
+- **Hosting**: Vercel
+- **Package Manager**: npm 8.0.0+
+- **Node.js**: 18.0.0+
+- **Development**: ESLint + Prettier
+
+## 🎯 次のマイルストーン
+
+1. ✅ **環境構築・依存関係**: 完了
+2. ✅ **ドキュメント整備**: 完了
+3. 🔄 **データベース設計・実装**: 進行中
+4. ⏳ **基本UI実装**: 待機中
+5. ⏳ **地図機能実装**: 待機中
+6. ⏳ **イベント機能実装**: 待機中
+
+## 🛠️ 開発開始
+
+プロジェクトの開発を始めるには、[開発環境構築](/development/01-setup)を参照してください。
+
+## 💡 貢献方法
+
+このプロジェクトへの貢献方法については、[コーディング規約](/development/03-coding-standards)と[プロジェクトロードマップ](/project-management/01-roadmap)を確認してください。
 
 ---
 
-**Pepino**: 今すぐ、近くで、リアルな出会いを 🍑
+**最終更新**: 2025年6月19日  
+**プロジェクトパス**: `/projects/pepino/`
