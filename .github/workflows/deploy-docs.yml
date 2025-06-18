@@ -1,0 +1,185 @@
+name: Deploy Documentation to GitHub Pages
+
+on:
+  # main ブランチへのプッシュ時
+  push:
+    branches: [ main ]
+    paths: [ 'docs/**' ]
+  
+  # 手動実行可能
+  workflow_dispatch:
+
+# GitHub Pages用の権限設定
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 並行実行制御
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # ドキュメントをビルド
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        
+      - name: Create docs site structure
+        run: |
+          # docs/フォルダの内容をそのまま使用
+          mkdir -p _site
+          cp -r docs/* _site/
+          
+          # ルートのREADME.mdを index.html に変換
+          cd _site
+          
+          # 簡単なHTML変換（Jekyll不使用）
+          cat > index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="ja">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Pepino Documentation</title>
+              <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+              <style>
+                  .markdown-body { max-width: 1024px; margin: 0 auto; padding: 2rem; }
+                  .markdown-body h1 { font-size: 2.5rem; font-weight: bold; margin-bottom: 1rem; }
+                  .markdown-body h2 { font-size: 2rem; font-weight: bold; margin-top: 2rem; margin-bottom: 1rem; }
+                  .markdown-body h3 { font-size: 1.5rem; font-weight: bold; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+                  .markdown-body p { margin-bottom: 1rem; line-height: 1.6; }
+                  .markdown-body ul { margin-bottom: 1rem; padding-left: 2rem; }
+                  .markdown-body li { margin-bottom: 0.5rem; }
+                  .markdown-body a { color: #3b82f6; text-decoration: underline; }
+                  .markdown-body a:hover { color: #1d4ed8; }
+                  .markdown-body code { background-color: #f3f4f6; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-family: 'Courier New', monospace; }
+                  .markdown-body pre { background-color: #1f2937; color: #f9fafb; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 1rem; }
+              </style>
+          </head>
+          <body class="bg-gray-50">
+              <div class="markdown-body">
+          EOF
+          
+          # README.mdをHTMLに変換（簡易版）
+          node << 'EOF'
+          const fs = require('fs');
+          const content = fs.readFileSync('README.md', 'utf8');
+          
+          let html = content
+            // Headers
+            .replace(/^# (.*$)/gm, '<h1>$1</h1>')
+            .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+            .replace(/^### (.*$)/gm, '<h3>$1</h3>')
+            // Bold
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            // Code blocks
+            .replace(/```bash\n([\s\S]*?)\n```/g, '<pre><code>$1</code></pre>')
+            .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
+            // Inline code
+            .replace(/`([^`]+)`/g, '<code>$1</code>')
+            // Links
+            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+            // Lists
+            .replace(/^- (.*$)/gm, '<li>$1</li>')
+            .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
+            // Paragraphs
+            .replace(/^([^<\n].*)$/gm, '<p>$1</p>')
+            // Line breaks
+            .replace(/\n/g, '<br>');
+          
+          fs.appendFileSync('index.html', html);
+          fs.appendFileSync('index.html', '\n              </div>\n          </body>\n          </html>');
+          EOF
+          
+          # ナビゲーションページ作成
+          cat > navigation.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="ja">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Pepino Documentation - Site Map</title>
+              <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+          </head>
+          <body class="bg-gray-50">
+              <div class="max-w-4xl mx-auto py-8 px-4">
+                  <h1 class="text-4xl font-bold text-gray-900 mb-8">📚 Pepino Documentation</h1>
+                  
+                  <div class="grid md:grid-cols-2 gap-6">
+                      <div class="bg-white rounded-lg shadow p-6">
+                          <h2 class="text-2xl font-bold text-gray-800 mb-4">📋 要件・設計</h2>
+                          <ul class="space-y-2">
+                              <li><a href="01-requirements/" class="text-blue-600 hover:text-blue-800">要件定義</a></li>
+                              <li><a href="02-design/" class="text-blue-600 hover:text-blue-800">システム設計</a></li>
+                          </ul>
+                      </div>
+                      
+                      <div class="bg-white rounded-lg shadow p-6">
+                          <h2 class="text-2xl font-bold text-gray-800 mb-4">🛠️ 開発ガイド</h2>
+                          <ul class="space-y-2">
+                              <li><a href="03-development/01-setup.md" class="text-blue-600 hover:text-blue-800">環境構築</a></li>
+                              <li><a href="03-development/02-database-implementation.md" class="text-blue-600 hover:text-blue-800">データベース実装</a></li>
+                              <li><a href="03-development/03-github-setup.md" class="text-blue-600 hover:text-blue-800">GitHub Projects</a></li>
+                              <li><a href="03-development/04-docker-setup.md" class="text-blue-600 hover:text-blue-800">Docker環境</a></li>
+                          </ul>
+                      </div>
+                      
+                      <div class="bg-white rounded-lg shadow p-6">
+                          <h2 class="text-2xl font-bold text-gray-800 mb-4">📊 プロジェクト管理</h2>
+                          <ul class="space-y-2">
+                              <li><a href="04-project-management/01-roadmap.md" class="text-blue-600 hover:text-blue-800">ロードマップ</a></li>
+                              <li><a href="04-project-management/02-timeline/gantt-chart.md" class="text-blue-600 hover:text-blue-800">ガントチャート</a></li>
+                              <li><a href="04-project-management/02-timeline/progress-tracking.md" class="text-blue-600 hover:text-blue-800">進捗トラッキング</a></li>
+                              <li><a href="04-project-management/03-decisions.md" class="text-blue-600 hover:text-blue-800">技術選定記録</a></li>
+                          </ul>
+                      </div>
+                      
+                      <div class="bg-white rounded-lg shadow p-6">
+                          <h2 class="text-2xl font-bold text-gray-800 mb-4">🚀 リンク</h2>
+                          <ul class="space-y-2">
+                              <li><a href="https://github.com/kpab/pepino" class="text-blue-600 hover:text-blue-800">GitHub Repository</a></li>
+                              <li><a href="https://github.com/kpab/pepino/issues" class="text-blue-600 hover:text-blue-800">Issues</a></li>
+                              <li><a href="https://github.com/kpab/pepino/projects" class="text-blue-600 hover:text-blue-800">Projects</a></li>
+                          </ul>
+                      </div>
+                  </div>
+                  
+                  <div class="mt-8 text-center">
+                      <p class="text-gray-600">最終更新: 2025年6月18日</p>
+                      <p class="text-gray-600">Pepino MVP Development Documentation</p>
+                  </div>
+              </div>
+          </body>
+          </html>
+          EOF
+          
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
+
+  # GitHub Pagesにデプロイ
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
