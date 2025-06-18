@@ -16,6 +16,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'development/setup',
         'development/database-implementation',
+        'development/github-pages-migration',
       ],
     },
     {
