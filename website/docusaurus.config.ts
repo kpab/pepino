@@ -6,15 +6,21 @@ const config: Config = {
   tagline: '現在地周辺のオフラインイベントを「今すぐ」発見・参加',
   favicon: 'img/favicon.ico',
 
-  // GitHub Pages設定
+  // Set the production url of your site here
   url: 'https://kpab.github.io',
+  // Set the /<baseUrl>/ pathname under which your site is served
   baseUrl: '/pepino/',
+
+  // GitHub pages deployment config.
   organizationName: 'kpab',
   projectName: 'pepino',
-  deploymentBranch: 'gh-pages',
-  trailingSlash: false,
 
-  // 日本語対応
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
+
+  // Even if you don't use internationalization, you can use this field to set
+  // useful metadata like html lang. For example, if your site is Chinese, you
+  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'ja',
     locales: ['ja'],
@@ -38,6 +44,8 @@ const config: Config = {
   ],
 
   themeConfig: {
+    // Replace with your project's social card
+    image: 'img/docusaurus-social-card.jpg',
     navbar: {
       title: '🍑 Pepino',
       items: [
@@ -56,6 +64,26 @@ const config: Config = {
     },
     footer: {
       style: 'dark',
+      links: [
+        {
+          title: 'ドキュメント',
+          items: [
+            {
+              label: 'はじめに',
+              to: '/intro',
+            },
+          ],
+        },
+        {
+          title: 'リンク',
+          items: [
+            {
+              label: 'GitHub',
+              href: 'https://github.com/kpab/pepino',
+            },
+          ],
+        },
+      ],
       copyright: `Copyright © ${new Date().getFullYear()} Pepino Project.`,
     },
     prism: {

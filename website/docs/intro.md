@@ -2,46 +2,72 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# 🍑 Pepino へようこそ
 
-Let's discover **Docusaurus in less than 5 minutes**.
+**現在地周辺のオフラインイベントを「今すぐ」発見・参加できるWebアプリ**
 
-## Getting Started
+## 🎯 Pepinoとは？
 
-Get started by **creating a new site**.
+Pepinoは、位置情報を活用して近場のリアルなイベントを見つけ、即座に参加できるWebアプリケーションです。
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+### 🔑 核心価値
 
-### What you'll need
+- **🏃‍♂️ オフライン限定**: リアルな出会いに特化
+- **📍 位置情報ベース**: GPS中心の近場イベント表示  
+- **⚡ 即時性**: 「今から2時間後」のような柔軟な参加
+- **🔗 統合表示**: connpass等外部APIとの連携
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+## 🎨 主要機能
 
-## Generate a new site
+### ユーザー向け機能
+- 現在地周辺のイベント検索・表示
+- 距離・時間・カテゴリでのフィルタリング
+- イベント詳細表示・参加機能
+- GPS取得・手動位置設定
 
-Generate a new Docusaurus site using the **classic template**.
+### 主催者向け機能
+- イベント作成・管理
+- 参加者管理・確認機能
 
-The classic template will automatically be added to your project after you run the command:
+## 🛠️ 技術構成
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+### フロントエンド
+- **Next.js 14** (App Router) + **TypeScript**
+- **Tailwind CSS** + **Zustand** (状態管理)
+- **React Hook Form** + **Zod** (フォーム・バリデーション)
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+### バックエンド
+- **Supabase** (PostgreSQL + PostGIS)
+- **Google Maps API** + **connpass API**
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+### インフラ
+- **Vercel** (ホスティング) + **GitHub Actions** (CI/CD)
 
-## Start your site
+## 🚀 開発状況
 
-Run the development server:
+**現在**: MVP開発段階 (2025年6月)
 
-```bash
-cd my-website
-npm run start
-```
+- ✅ Next.js 14環境構築完了
+- ✅ データベース選定 (Supabase)
+- ✅ プロジェクト管理体制確立
+- 🔄 UI実装進行中
+- ⏳ 地図表示機能
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+## 📚 ドキュメント構成
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+このドキュメントサイトでは、Pepinoプロジェクトの全体像を確認できます：
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+- **📋 要件・設計**: ユーザー像・機能要件・システム設計
+- **🛠️ 開発ガイド**: 環境構築・実装手順・テスト
+- **📊 プロジェクト管理**: ロードマップ・進捗・技術選定記録
+
+## 🎯 ミッション
+
+**今すぐ、近くで、リアルな出会いを**
+
+オンライン化が進む中で、物理的な場所で人と人が出会う価値を再発見し、  
+地域コミュニティの活性化に貢献します。
+
+---
+
+**さあ、Pepinoでリアルなつながりを見つけましょう！** 🍑
