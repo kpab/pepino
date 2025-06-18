@@ -87,6 +87,33 @@ web_modules/
 .next
 out
 
+# Vercel deployment files
+.vercel
+
+# TypeScript incremental build files
+*.tsbuildinfo
+next-env.d.ts
+
+# PWA files
+public/sw.js
+public/workbox-*.js
+public/fallback-*.js
+
+# Sentry Config File
+.sentryclirc
+
+# Testing
+/coverage
+
+# Storybook build outputs
+.out
+.storybook-out
+storybook-static
+
+# Temporary folders
+tmp/
+temp/
+
 # Nuxt.js build / generate output
 .nuxt
 dist
