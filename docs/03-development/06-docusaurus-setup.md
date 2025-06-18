@@ -42,11 +42,12 @@ npm install
 
 ### Step 2: 設定ファイル修正
 
-**`website/docusaurus.config.js`**
-```javascript
+**`website/docusaurus.config.ts`**
+```typescript
 import {themes as prismThemes} from 'prism-react-renderer';
+import type {Config} from '@docusaurus/types';
 
-const config = {
+const config: Config = {
   title: '🍑 Pepino',
   tagline: '現在地周辺のオフラインイベントを「今すぐ」発見・参加',
   favicon: 'img/favicon.ico',
@@ -70,7 +71,7 @@ const config = {
       'classic',
       {
         docs: {
-          sidebarPath: './sidebars.js',
+          sidebarPath: './sidebars.ts',
           routeBasePath: '/', // ドキュメントをルートに
           editUrl: 'https://github.com/kpab/pepino/tree/main/website/',
         },
@@ -115,9 +116,11 @@ export default config;
 
 ### Step 3: ドキュメント構造設計
 
-**`website/sidebars.js`**
-```javascript
-const sidebars = {
+**`website/sidebars.ts`**
+```typescript
+import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
+
+const sidebars: SidebarsConfig = {
   tutorialSidebar: [
     'intro',
     {
