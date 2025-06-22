@@ -1,0 +1,77 @@
+name: 🐛 バグレポート
+description: バグや問題を報告
+title: "[Bug] "
+labels: ["bug", "triage"]
+projects: ["kpab/1"]
+assignees:
+  - kpab
+body:
+  - type: markdown
+    attributes:
+      value: |
+        バグレポートありがとうございます！詳細を記入してください。
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 🐛 バグの説明
+      description: 何が起きているか詳しく説明してください
+      placeholder: 具体的な症状を記述...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 🔄 再現手順
+      description: バグを再現する手順を記述してください
+      placeholder: |
+        1. ○○画面に移動
+        2. ○○ボタンをクリック
+        3. ○○が表示される
+        4. エラーが発生
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: ✅ 期待される動作
+      description: どのような動作を期待していましたか？
+      placeholder: 正常な場合の期待動作...
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 🌐 環境情報
+      description: 使用している環境を教えてください
+      placeholder: |
+        - OS: 
+        - ブラウザ: 
+        - バージョン: 
+        - デバイス: 
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 📎 追加情報
+      description: スクリーンショット、ログ、その他関連情報
+      placeholder: 必要に応じて画像やログを添付してください
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 🚨 優先度
+      description: このバグの優先度はどの程度ですか？
+      options:
+        - Low (低) - 軽微な問題
+        - Medium (中) - 一般的な機能に影響
+        - High (高) - 重要な機能に影響
+        - Critical (緊急) - アプリが使用不可
+      default: 1
+    validations:
+      required: true

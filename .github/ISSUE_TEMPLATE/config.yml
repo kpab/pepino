@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 ドキュメント
+    url: https://kpab.github.io/pepino/
+    about: プロジェクトのドキュメントとガイド
+  - name: 💬 質問・相談
+    url: https://github.com/kpab/pepino/discussions
+    about: 質問や相談はDiscussionsで

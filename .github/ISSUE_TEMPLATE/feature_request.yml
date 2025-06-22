@@ -1,0 +1,89 @@
+name: ✨ 機能要求
+description: 新機能や改善を提案
+title: "[Feature] "
+labels: ["enhancement", "feature-request"]
+projects: ["kpab/1"]
+assignees:
+  - kpab
+body:
+  - type: markdown
+    attributes:
+      value: |
+        新機能のご提案ありがとうございます！
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 🎯 解決したい課題
+      description: この機能で解決したい問題は何ですか？
+      placeholder: 現在○○で困っている...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: 💡 提案する解決策
+      description: どのような機能や改善を提案しますか？
+      placeholder: ○○機能を追加することで...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 🔄 代替案
+      description: 他に考えられる解決方法はありますか？
+      placeholder: 代わりに○○という方法も...
+
+  - type: textarea
+    id: mockup
+    attributes:
+      label: 🎨 UI/UXイメージ
+      description: 画面イメージやワイヤーフレームがあれば添付してください
+      placeholder: 画像やスケッチを添付...
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: 📂 カテゴリ
+      description: この機能はどの分野に関連しますか？
+      options:
+        - UI/UX - ユーザーインターフェース
+        - Backend - サーバー側機能
+        - Performance - パフォーマンス改善
+        - Security - セキュリティ強化
+        - Integration - 外部連携
+        - Other - その他
+      default: 0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 🚨 優先度
+      description: この機能の重要度はどの程度ですか？
+      options:
+        - Low (低) - あると良い機能
+        - Medium (中) - 価値のある機能
+        - High (高) - 重要な機能
+        - Critical (緊急) - MVP に必要
+      default: 1
+    validations:
+      required: true
+
+  - type: dropdown
+    id: effort
+    attributes:
+      label: ⏱️ 想定工数
+      description: 実装にどの程度の工数が必要と思われますか？
+      options:
+        - Small (小) - 数時間
+        - Medium (中) - 1-3日
+        - Large (大) - 1-2週間
+        - Extra Large (特大) - 1ヶ月以上
+        - Unknown (不明) - 調査が必要
+      default: 4
+    validations:
+      required: true

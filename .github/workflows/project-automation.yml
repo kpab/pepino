@@ -1,0 +1,32 @@
+name: Project Automation
+
+on:
+  issues:
+    types: [opened, closed, reopened]
+  pull_request:
+    types: [opened, closed, merged, reopened]
+  
+jobs:
+  add_to_project:
+    name: Add issue/PR to project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add to project
+        uses: actions/add-to-project@v0.5.0
+        with:
+          project-url: https://github.com/users/kpab/projects/1
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  update_project_status:
+    name: Update project item status
+    runs-on: ubuntu-latest
+    if: github.event.action == 'closed'
+    steps:
+      - name: Move to Done
+        uses: leonsteinhaeuser/project-beta-automations@v2.2.1
+        with:
+          gh_token: ${{ secrets.GITHUB_TOKEN }}
+          organization: kpab
+          project_id: 1
+          resource_node_id: ${{ github.event.issue.node_id || github.event.pull_request.node_id }}
+          status_value: Done

@@ -1,0 +1,61 @@
+# GitHub Labels Configuration
+
+# 機能別ラベル
+frontend:
+  - src/app/**/*
+  - src/components/**/*
+  - "*.tsx"
+  - "*.css"
+
+backend:
+  - src/app/api/**/*
+  - "*.api.ts"
+  - supabase/**/*
+
+database:
+  - supabase/**/*
+  - "**/*database*"
+  - "**/*schema*"
+  - "**/*migration*"
+
+documentation:
+  - docs/**/*
+  - "*.md"
+  - README*
+
+testing:
+  - tests/**/*
+  - "**/*.test.*"
+  - "**/*.spec.*"
+
+infrastructure:
+  - .github/**/*
+  - docker*
+  - "*.config.*"
+  - "*.json"
+
+# 優先度ラベル
+priority-high:
+  - any: ["critical", "urgent", "high priority"]
+
+priority-medium:
+  - any: ["medium priority", "important"]
+
+priority-low:
+  - any: ["low priority", "nice to have"]
+
+# サイズラベル
+size-xs:
+  - files: ["<=2"]
+
+size-s:
+  - files: ["3-5"]
+
+size-m:
+  - files: ["6-10"]
+
+size-l:
+  - files: ["11-20"]
+
+size-xl:
+  - files: [">20"]

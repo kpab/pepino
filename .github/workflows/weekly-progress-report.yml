@@ -1,0 +1,50 @@
+name: Weekly Progress Report
+
+on:
+  schedule:
+    - cron: '0 9 * * MON'  # 毎週月曜日 9:00 JST
+  workflow_dispatch:  # 手動実行も可能
+
+jobs:
+  generate-progress-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate progress report
+        id: progress
+        run: |
+          # GitHub APIを使用して進捗データを取得
+          echo "## 📊 週次進捗レポート $(date '+%Y年%m月%d日')" > progress-report.md
+          echo "" >> progress-report.md
+          
+          # 今週のIssue/PR統計
+          echo "### 📈 今週の実績" >> progress-report.md
+          echo "- 新規Issue: $(gh api repos/${{ github.repository }}/issues --jq '[.[] | select(.created_at > (now - 604800 | strftime("%Y-%m-%dT%H:%M:%SZ")))] | length')" >> progress-report.md
+          echo "- 完了Issue: $(gh api repos/${{ github.repository }}/issues --jq '[.[] | select(.closed_at > (now - 604800 | strftime("%Y-%m-%dT%H:%M:%SZ")) and .state == "closed")] | length')" >> progress-report.md
+          echo "- マージされたPR: $(gh api repos/${{ github.repository }}/pulls --jq '[.[] | select(.merged_at > (now - 604800 | strftime("%Y-%m-%dT%H:%M:%SZ")) and .merged == true)] | length')" >> progress-report.md
+          echo "" >> progress-report.md
+          
+          # プロジェクト進捗
+          echo "### 🎯 プロジェクト進捗" >> progress-report.md
+          echo "- 進行中タスク: $(gh api repos/${{ github.repository }}/issues --jq '[.[] | select(.state == "open")] | length')" >> progress-report.md
+          echo "- 完了タスク: $(gh api repos/${{ github.repository }}/issues --jq '[.[] | select(.state == "closed")] | length')" >> progress-report.md
+          
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Issue with Progress Report
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('progress-report.md', 'utf8');
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `📊 週次進捗レポート ${new Date().toLocaleDateString('ja-JP')}`,
+              body: report,
+              labels: ['progress-report', 'weekly']
+            });
