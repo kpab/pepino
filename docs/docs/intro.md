@@ -114,11 +114,11 @@ Pepinoは位置情報ベースでリアルな出会いに特化したイベン�
 
 ## 🛠️ 開発開始
 
-プロジェクトの開発を始めるには、[開発環境構築](/development/01-setup)を参照してください。
+プロジェクトの開発を始めるには、[開発環境構築](./development/01-setup.md)を参照してください。
 
 ## 💡 貢献方法
 
-このプロジェクトへの貢献方法については、[コーディング規約](/development/03-coding-standards)と[プロジェクトロードマップ](/project-management/01-roadmap)を確認してください。
+このプロジェクトへの貢献方法については、[コーディング規約](./development/03-coding-standards.md)と[プロジェクトロードマップ](./project-management/01-roadmap.md)を確認してください。
 
 ---
 

@@ -197,7 +197,7 @@ Week 3:   ████         4時間 (プロジェクト管理設計) - 進行
 - **詳細TODO**: [todo-list](./todo-list)
 - **ガントチャート**: [gantt-chart](./gantt-chart)  
 - **技術選定記録**: [decisions](./decisions)
-- **開発ガイド**: [../development/](../development/)
+- **開発ガイド**: [../development/01-setup.md](../development/01-setup.md)
 
 ---
 
