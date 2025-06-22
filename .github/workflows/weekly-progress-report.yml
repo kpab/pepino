@@ -1,4 +1,4 @@
-name: Weekly Progress Report
+name: Weekly Progress Report & Gantt Update
 
 on:
   schedule:
@@ -6,16 +6,41 @@ on:
   workflow_dispatch:  # 手動実行も可能
 
 jobs:
-  generate-progress-report:
+  update-gantt-and-report:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Generate progress report
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          cd .github/scripts
+          npm init -y
+          npm install @octokit/rest
+
+      - name: Update Gantt Chart
+        id: gantt-update
+        run: |
+          cd .github/scripts
+          node update-gantt.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate detailed progress report
         id: progress
         run: |
-          # GitHub APIを使用して進捗データを取得
+          # 詳細な進捗レポートを生成
           echo "## 📊 週次進捗レポート $(date '+%Y年%m月%d日')" > progress-report.md
           echo "" >> progress-report.md
           
@@ -26,13 +51,31 @@ jobs:
           echo "- マージされたPR: $(gh api repos/${{ github.repository }}/pulls --jq '[.[] | select(.merged_at > (now - 604800 | strftime("%Y-%m-%dT%H:%M:%SZ")) and .merged == true)] | length')" >> progress-report.md
           echo "" >> progress-report.md
           
-          # プロジェクト進捗
-          echo "### 🎯 プロジェクト進捗" >> progress-report.md
+          # 全体進捗
+          echo "### 🎯 プロジェクト全体進捗" >> progress-report.md
           echo "- 進行中タスク: $(gh api repos/${{ github.repository }}/issues --jq '[.[] | select(.state == "open")] | length')" >> progress-report.md
           echo "- 完了タスク: $(gh api repos/${{ github.repository }}/issues --jq '[.[] | select(.state == "closed")] | length')" >> progress-report.md
+          echo "" >> progress-report.md
+          
+          # ガントチャート更新通知
+          echo "### 🔄 ガントチャート更新" >> progress-report.md
+          echo "- ガントチャートが最新の進捗で自動更新されました" >> progress-report.md
+          echo "- 詳細: [ガントチャート](https://kpab.github.io/pepino/docs/project-management/gantt-chart)" >> progress-report.md
           
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit updated gantt chart
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add docs/docs/project-management/04-gantt-chart.md
+          if git diff --staged --quiet; then
+            echo "ガントチャートに変更はありません"
+          else
+            git commit -m "📊 ガントチャート自動更新 - $(date '+%Y/%m/%d')"
+            git push
+          fi
 
       - name: Create Issue with Progress Report
         uses: actions/github-script@v7

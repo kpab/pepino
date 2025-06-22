@@ -1,0 +1,68 @@
+name: Manual Gantt Update
+
+on:
+  workflow_dispatch:
+    inputs:
+      update_description:
+        description: '更新理由（オプション）'
+        required: false
+        default: '手動更新'
+
+jobs:
+  update-gantt:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: read
+      pull-requests: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          cd .github/scripts
+          npm init -y
+          npm install @octokit/rest
+
+      - name: Update Gantt Chart
+        run: |
+          cd .github/scripts
+          node update-gantt.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit updated gantt chart
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add docs/docs/project-management/04-gantt-chart.md
+          if git diff --staged --quiet; then
+            echo "ガントチャートに変更はありません"
+            echo "no_changes=true" >> $GITHUB_OUTPUT
+          else
+            git commit -m "📊 ガントチャート手動更新: ${{ github.event.inputs.update_description }}"
+            git push
+            echo "no_changes=false" >> $GITHUB_OUTPUT
+          fi
+        id: commit
+
+      - name: Summary
+        run: |
+          if [ "${{ steps.commit.outputs.no_changes }}" = "true" ]; then
+            echo "### ✅ ガントチャート更新完了" >> $GITHUB_STEP_SUMMARY
+            echo "変更はありませんでした。現在の進捗が既に反映されています。" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### 🔄 ガントチャート更新完了" >> $GITHUB_STEP_SUMMARY
+            echo "最新の進捗が反映されました。" >> $GITHUB_STEP_SUMMARY
+            echo "更新理由: ${{ github.event.inputs.update_description }}" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📋 [ガントチャートを確認](https://kpab.github.io/pepino/docs/project-management/gantt-chart)" >> $GITHUB_STEP_SUMMARY
