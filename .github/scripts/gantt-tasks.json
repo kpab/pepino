@@ -2,28 +2,38 @@
   "tasks": [
     {
       "id": "req",
-      "name": "要件定義",
-      "section": "Phase 1: 基盤構築",
+      "name": "要件定義・調査",
+      "section": "Phase 1: 要件・設計フェーズ",
       "status": "done",
       "start_date": "2025-06-09",
-      "end_date": "2025-06-16",
+      "end_date": "2025-06-20",
       "github_labels": ["documentation", "requirements"],
       "dependencies": []
     },
     {
       "id": "tech",
       "name": "技術選定",
-      "section": "Phase 1: 基盤構築", 
+      "section": "Phase 1: 要件・設計フェーズ", 
       "status": "done",
-      "start_date": "2025-06-16",
-      "end_date": "2025-06-18",
+      "start_date": "2025-06-18",
+      "end_date": "2025-06-22",
       "github_labels": ["documentation", "architecture"],
+      "dependencies": []
+    },
+    {
+      "id": "project",
+      "name": "GitHub Projects設定",
+      "section": "Phase 1: 要件・設計フェーズ",
+      "status": "done",
+      "start_date": "2025-06-18",
+      "end_date": "2025-06-22", 
+      "github_labels": ["infrastructure", "project-management"],
       "dependencies": []
     },
     {
       "id": "env",
       "name": "Next.js環境構築",
-      "section": "Phase 1: 基盤構築",
+      "section": "Phase 2: 環境構築・基盤",
       "status": "done", 
       "start_date": "2025-06-16",
       "end_date": "2025-06-18",
@@ -31,104 +41,164 @@
       "dependencies": []
     },
     {
-      "id": "project",
-      "name": "GitHub Projects設定",
-      "section": "インフラ・CI/CD",
-      "status": "done",
-      "start_date": "2025-06-18",
-      "end_date": "2025-06-19", 
-      "github_labels": ["infrastructure", "project-management"],
-      "dependencies": []
-    },
-    {
       "id": "design",
-      "name": "デザインシステム",
-      "section": "Phase 2: UI/UX実装",
+      "name": "システム設計",
+      "section": "Phase 1: 要件・設計フェーズ",
       "status": "active",
-      "start_date": "2025-06-18",
-      "end_date": "2025-06-25",
-      "github_labels": ["frontend", "design"],
+      "start_date": "2025-06-22",
+      "end_date": "2025-06-30",
+      "github_labels": ["documentation", "architecture"],
       "dependencies": []
     },
     {
-      "id": "db",
+      "id": "db-design",
+      "name": "データベース設計",
+      "section": "Phase 1: 要件・設計フェーズ",
+      "status": "pending",
+      "start_date": "2025-06-25",
+      "end_date": "2025-06-30",
+      "github_labels": ["documentation", "database"],
+      "dependencies": []
+    },
+    {
+      "id": "api-design",
+      "name": "API設計",
+      "section": "Phase 1: 要件・設計フェーズ",
+      "status": "pending",
+      "start_date": "2025-06-28",
+      "end_date": "2025-06-30",
+      "github_labels": ["documentation", "api"],
+      "dependencies": []
+    },
+    {
+      "id": "db-setup",
       "name": "Supabaseセットアップ",
-      "section": "Phase 3: コア機能",
+      "section": "Phase 2: 環境構築・基盤",
       "status": "pending",
-      "start_date": "2025-06-19",
-      "end_date": "2025-06-20",
+      "start_date": "2025-07-01",
+      "end_date": "2025-07-07",
       "github_labels": ["backend", "database"],
-      "dependencies": []
+      "dependencies": ["db-design"]
     },
     {
-      "id": "ui1",
-      "name": "イベント一覧UI",
-      "section": "Phase 2: UI/UX実装",
+      "id": "cicd",
+      "name": "CI/CD基盤構築",
+      "section": "Phase 2: 環境構築・基盤",
       "status": "pending",
-      "start_date": "after design",
-      "duration": "3d",
-      "github_labels": ["frontend", "ui"],
-      "dependencies": ["design"]
+      "start_date": "2025-07-07",
+      "end_date": "2025-07-14",
+      "github_labels": ["infrastructure", "cicd"],
+      "dependencies": ["project"]
     },
     {
-      "id": "ui2", 
-      "name": "検索フィルターUI",
-      "section": "Phase 2: UI/UX実装",
+      "id": "docker",
+      "name": "Docker環境",
+      "section": "Phase 2: 環境構築・基盤",
       "status": "pending",
-      "start_date": "after ui1",
-      "duration": "3d",
+      "start_date": "2025-07-14",
+      "end_date": "2025-07-21",
+      "github_labels": ["infrastructure", "docker"],
+      "dependencies": ["cicd"]
+    },
+    {
+      "id": "ui-basic",
+      "name": "基本UI実装",
+      "section": "Phase 3: コア機能開発",
+      "status": "pending",
+      "start_date": "2025-07-21",
+      "end_date": "2025-08-04",
       "github_labels": ["frontend", "ui"],
-      "dependencies": ["ui1"]
+      "dependencies": ["design", "db-setup"]
+    },
+    {
+      "id": "event-crud",
+      "name": "イベントCRUD",
+      "section": "Phase 3: コア機能開発", 
+      "status": "pending",
+      "start_date": "2025-08-04",
+      "end_date": "2025-08-18",
+      "github_labels": ["backend", "api"],
+      "dependencies": ["ui-basic"]
     },
     {
       "id": "location",
       "name": "位置情報機能",
-      "section": "Phase 3: コア機能",
+      "section": "Phase 3: コア機能開発",
       "status": "pending",
-      "start_date": "after db",
-      "duration": "3d",
+      "start_date": "2025-08-18",
+      "end_date": "2025-09-01",
       "github_labels": ["backend", "location"],
-      "dependencies": ["db"]
-    },
-    {
-      "id": "api",
-      "name": "イベントAPI",
-      "section": "Phase 3: コア機能", 
-      "status": "pending",
-      "start_date": "after location",
-      "duration": "4d",
-      "github_labels": ["backend", "api"],
-      "dependencies": ["location"]
+      "dependencies": ["event-crud"]
     },
     {
       "id": "search",
       "name": "検索・フィルター",
-      "section": "Phase 3: コア機能",
+      "section": "Phase 3: コア機能開発",
       "status": "pending",
-      "start_date": "after api",
-      "duration": "3d", 
+      "start_date": "2025-09-01",
+      "end_date": "2025-09-15", 
       "github_labels": ["backend", "search"],
-      "dependencies": ["api"]
+      "dependencies": ["location"]
     },
     {
       "id": "maps",
       "name": "Google Maps統合",
       "section": "Phase 4: 地図・統合",
       "status": "pending",
-      "start_date": "2025-07-07",
-      "end_date": "2025-07-14",
+      "start_date": "2025-09-15",
+      "end_date": "2025-09-29",
       "github_labels": ["frontend", "maps"],
-      "dependencies": []
+      "dependencies": ["search"]
     },
     {
-      "id": "cicd",
-      "name": "CI/CD構築",
-      "section": "インフラ・CI/CD",
+      "id": "external",
+      "name": "外部API連携",
+      "section": "Phase 4: 地図・統合",
       "status": "pending",
-      "start_date": "after project",
-      "duration": "2d",
-      "github_labels": ["infrastructure", "cicd"],
-      "dependencies": ["project"]
+      "start_date": "2025-09-29",
+      "end_date": "2025-10-06",
+      "github_labels": ["backend", "api"],
+      "dependencies": ["maps"]
+    },
+    {
+      "id": "perf",
+      "name": "パフォーマンス最適化",
+      "section": "Phase 4: 地図・統合",
+      "status": "pending",
+      "start_date": "2025-10-06",
+      "end_date": "2025-10-13",
+      "github_labels": ["frontend", "performance"],
+      "dependencies": ["external"]
+    },
+    {
+      "id": "test",
+      "name": "統合テスト",
+      "section": "Phase 5: テスト・リリース",
+      "status": "pending",
+      "start_date": "2025-10-13",
+      "end_date": "2025-10-20",
+      "github_labels": ["testing"],
+      "dependencies": ["perf"]
+    },
+    {
+      "id": "ux-test",
+      "name": "ユーザビリティテスト",
+      "section": "Phase 5: テスト・リリース",
+      "status": "pending",
+      "start_date": "2025-10-20",
+      "end_date": "2025-10-27",
+      "github_labels": ["testing", "ux"],
+      "dependencies": ["test"]
+    },
+    {
+      "id": "deploy",
+      "name": "本番デプロイ",
+      "section": "Phase 5: テスト・リリース",
+      "status": "pending",
+      "start_date": "2025-10-27",
+      "end_date": "2025-10-31",
+      "github_labels": ["infrastructure", "deployment"],
+      "dependencies": ["ux-test"]
     }
   ]
 }
