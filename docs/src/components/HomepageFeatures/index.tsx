@@ -11,32 +11,29 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
+    title: '🎯 位置情報ベース',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        GPS/手動位置から現在地周辺のオフラインイベントを即座に検索・表示します。
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: '⚡ 即時参加',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        「今から2時間後」のような柔軟な参加が可能。リアルタイムなイベント発見を実現します。
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: '🤝 オフライン限定',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        リアルな出会いと体験に特化。connpass等の外部APIと連携してイベント情報を統合表示します。
       </>
     ),
   },
