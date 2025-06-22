@@ -71,6 +71,36 @@
       "dependencies": []
     },
     {
+      "id": "wireframe",
+      "name": "UI/UXワイヤーフレーム",
+      "section": "Phase 1: 要件・設計フェーズ",
+      "status": "pending",
+      "start_date": "2025-06-24",
+      "end_date": "2025-06-27",
+      "github_labels": ["design", "wireframe"],
+      "dependencies": ["design"]
+    },
+    {
+      "id": "design-system",
+      "name": "デザインシステム策定",
+      "section": "Phase 1: 要件・設計フェーズ",
+      "status": "pending",
+      "start_date": "2025-06-26",
+      "end_date": "2025-06-30",
+      "github_labels": ["design", "design-system"],
+      "dependencies": ["wireframe"]
+    },
+    {
+      "id": "ui-design",
+      "name": "画面デザイン決定",
+      "section": "Phase 1: 要件・設計フェーズ",
+      "status": "pending",
+      "start_date": "2025-06-28",
+      "end_date": "2025-06-30",
+      "github_labels": ["design", "ui"],
+      "dependencies": ["design-system"]
+    },
+    {
       "id": "db-setup",
       "name": "Supabaseセットアップ",
       "section": "Phase 2: 環境構築・基盤",
