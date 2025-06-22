@@ -1,4 +1,21 @@
 {
   "projectName": "pepino",
-  "projectOwner": "kpab"
+  "projectOwner": "kpab",
+  "files": [
+    "README.md"
+  ],
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributorsPerLine": 7,
+  "contributors": [
+    {
+      "login": "kpab",
+      "name": "kpab",
+      "avatar_url": "https://avatars.githubusercontent.com/u/91237200?v=4",
+      "profile": "https://github.com/kpab",
+      "contributions": [
+        "code"
+      ]
+    }
+  ]
 }
