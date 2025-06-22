@@ -33,10 +33,6 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           editUrl: 'https://github.com/kpab/pepino/tree/main/docs/',
         },
-        blog: {
-          showReadingTime: true,
-          editUrl: 'https://github.com/kpab/pepino/tree/main/docs/',
-        },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -58,7 +54,6 @@ const config: Config = {
           position: 'left',
           label: 'ドキュメント',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/kpab/pepino',
           label: 'GitHub',
