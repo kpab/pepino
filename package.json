@@ -28,7 +28,7 @@
     "tailwindcss": "^4.1.11",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
-    "zustand": "^4.5.2",
+    "zustand": "^5.0.8",
     "react-hook-form": "^7.51.5",
     "zod": "^3.23.8",
     "@hookform/resolvers": "^3.6.0",
